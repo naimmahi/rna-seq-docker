@@ -38,35 +38,40 @@ Command: docker run -v /home/ubuntu/:/host/home -v /etc:/host/etc -v /mnt/SCRATC
 
 The successful completion of the Docker will create the following directory structure in the directory containing the input file:
 
-Assuming the initial input was:
- </path/sample.tar>
+Assuming the initial input was: /path/sample.tar
 
  The output is expected to be:
- <path/sample.tar>
- <path/sample_star.log>
- <path/star_2_pass/cufflinks_sample.log>
- <path/star_2_pass/sample_star.bam>
- <path/star_2_pass/genes.fpkm_tracking>
- <path/star_2_pass/isoforms.fpkm_tracking>
- <path/star_2_pass/skipped.gtf>
- <path/star_2_pass/transcripts.gtf>
- <path/qc/>
- <path/qc/fastqc_results>
- <path/qc/sample.validate>
- <path/qc/sample.rna_seq_metrics.txt>
+ path/sample.tar
+ path/sample_star.log
+ path/star_2_pass/cufflinks_sample.log
+ path/star_2_pass/sample_star.bam
+ path/star_2_pass/genes.fpkm_tracking
+ path/star_2_pass/isoforms.fpkm_tracking
+ path/star_2_pass/skipped.gtf
+ path/star_2_pass/transcripts.gtf
+ path/qc/
+ path/qc/fastqc_results
+ path/qc/sample.validate
+ path/qc/sample.rna_seq_metrics.txt
 
 
 Supporting files to run the docker:
 1. Reference Genome: reference.fa
+
 2. Gene Annotation File: annotation.gtf
+
 4. STAR reference genome build
-5. Picard sequence dictionary: Command: java –jar </path/picard.jar> --CreateSequenceDictionary R=<path/reference.fa> O=reference.fa.dict
-6. Samtools reference index (.faidx): Command: samtools faidx <path/hs37d5.fa>
+
+5. Picard sequence dictionary: Command: java –jar /path/picard.jar --CreateSequenceDictionary R=/path/reference.fa O=reference.fa.dict
+
+6. Samtools reference index (.faidx): Command: samtools faidx path/reference.fa
+
 7. RefFlat file: Convert annotation.gtf to refFlat.txt.
     -Download: gtfToGenePred: http://hgdownload.cse.ucsc.edu/admin/exe/macOSX.x86_64/gtfToGenePred
     -Convert: gtfToGenePred -genePredExt -geneNameAsName2 genes.gtf refFlat.tmp.txt
     paste <(cut -f 12 refFlat.tmp.txt) <(cut -f 1-10 refFlat.tmp.txt) > refFlat.txt
     gzip refFlat.txt
+    
     (Source: https://gist.github.com/igordot/4467f1b02234ff864e61)
 
 
