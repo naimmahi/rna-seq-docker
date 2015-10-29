@@ -5,7 +5,7 @@ Cufflinks - http://cole-trapnell-lab.github.io/cufflinks/ - OSI-approved Boost L
 FASTQC - http://www.bioinformatics.babraham.ac.uk/projects/fastqc/ - GNU General Public License v3 or later
 Picard - https://github.com/broadinstitute/picard - MIT License
 STAR pipeline from ICGC - https://github.com/akahles/icgc_rnaseq_align - MIT License
-Biobambami - https://github.com/gt1/biobambam - GNU General Public License v3
+Biobambam - https://github.com/gt1/biobambam - GNU General Public License v3
 Samtools - https://github.com/samtools/samtools - MIT License
 
 This docker image takes as input a compressed tar archive of two fastq files and provides an aligned BAM file, QC statistics and gene expression quantification.
