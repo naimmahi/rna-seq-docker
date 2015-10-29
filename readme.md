@@ -1,12 +1,19 @@
 Tools supplied in this Docker image:
 
-STAR - https://code.google.com/p/rna-star/ - GNU General Public License v3
-Cufflinks - http://cole-trapnell-lab.github.io/cufflinks/ - OSI-approved Boost License
-FASTQC - http://www.bioinformatics.babraham.ac.uk/projects/fastqc/ - GNU General Public License v3 or later
-Picard - https://github.com/broadinstitute/picard - MIT License
-STAR pipeline from ICGC - https://github.com/akahles/icgc_rnaseq_align - MIT License
-Biobambam - https://github.com/gt1/biobambam - GNU General Public License v3
-Samtools - https://github.com/samtools/samtools - MIT License
+(a) STAR - https://code.google.com/p/rna-star/ - GNU General Public License v3
+
+(b) Cufflinks - http://cole-trapnell-lab.github.io/cufflinks/ - OSI-approved Boost License
+
+(c) FASTQC - http://www.bioinformatics.babraham.ac.uk/projects/fastqc/ - GNU General Public License v3 or later
+
+(d) Picard - https://github.com/broadinstitute/picard - MIT License
+
+(e) STAR pipeline from ICGC - https://github.com/akahles/icgc_rnaseq_align - MIT License
+
+(f) Biobambam - https://github.com/gt1/biobambam - GNU General Public License v3
+
+(g) Samtools - https://github.com/samtools/samtools - MIT License
+
 
 This docker image takes as input a compressed tar archive of two fastq files and provides an aligned BAM file, QC statistics and gene expression quantification.
 Using the Docker image
