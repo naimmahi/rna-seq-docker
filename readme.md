@@ -16,7 +16,13 @@ Tools supplied in this Docker image:
 
 
 This docker image takes as input a compressed tar archive of two fastq files and provides an aligned BAM file, QC statistics and gene expression quantification.
-Using the Docker image
+
+****Install Docker****
+Instructions for the installation of Docker are available on the Docker website here: https://docs.docker.com/installation/
+The Docker version currently being used is: version 1.9.0, build 76d6bc9. 
+
+
+****Using the Docker image****
 
 1.  Load the Docker image. Must be done as root. 
 
@@ -56,15 +62,56 @@ Assuming the initial input was: /path/sample.tar
 
 
 Supporting files to run the docker:
-1. Reference Genome: reference.fa
+
+1. Reference Genome
+
+Download the reference genome used in the 1000 Genomes Project and decompress the reference genome.
+Link:ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/hs37d5.fa.gz
+
+Command:
+gunzip <path/hs37d5.fa.gz> 
+
 
 2. Gene Annotation File: annotation.gtf
 
-4. STAR reference genome build
+Download the Gencode Annotation file for the above reference and decompress the annotation file.
+Link:ftp://ftp.sanger.ac.uk/pub/gencode/Gencode_human/release_19/gencode.v19.annotation.gtf.gz
 
-5. Picard sequence dictionary: Command: java –jar /path/picard.jar --CreateSequenceDictionary R=/path/reference.fa O=reference.fa.dict
+Command:
+gunzip <path/gencode.v19.annotation.gtf.gz>
 
-6. Samtools reference index (.faidx): Command: samtools faidx path/reference.fa
+3.  Convert the chromosome names in the GTF file to reflect those in the reference genome
+
+Command:
+tail -n +6 gencode.v19.annotation.gtf | sed –e  "s/^chrM/MT/g;s/^chr//g" > gencode.v19.annotation.hs37d5_chr.gtf
+Reference: Pancancer-PCAWG Wiki
+
+4.  Build the STAR reference genome:
+
+STAR
+--runMode genomeGenerate 
+--genomeDir </path/star_genome/> 
+--genomeFastaFiles </path/hs37d5.fa> 
+--sjdbOverhang 100 
+--sjdbGTFfile </path/gencode.v19.annotation.gtf> 
+--runThreadN <runThreadN>
+
+Reference: Pancancer-PCAWG Wiki
+
+
+5. Picard sequence dictionary:
+
+Command:
+java –jar </path/picard.jar> 
+--CreateSequenceDictionary 
+R=<path/hs37d5.fa> 
+O=hs37d5.fa.dict
+
+
+6. Samtools reference index (.faidx): 
+
+Command: 
+samtools faidx <path/hs37d5.fa>
 
 7. RefFlat file: Convert annotation.gtf to refFlat.txt.
     -Download: gtfToGenePred: http://hgdownload.cse.ucsc.edu/admin/exe/macOSX.x86_64/gtfToGenePred
