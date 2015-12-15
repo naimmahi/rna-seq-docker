@@ -68,8 +68,7 @@ Supporting files to run the docker:
 Download the reference genome used in the 1000 Genomes Project and decompress the reference genome.
 Link:ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/hs37d5.fa.gz
 
-Command:
-gunzip <path/hs37d5.fa.gz> 
+Command: gunzip <path/hs37d5.fa.gz> 
 
 
 2. Gene Annotation File: annotation.gtf
@@ -77,24 +76,22 @@ gunzip <path/hs37d5.fa.gz>
 Download the Gencode Annotation file for the above reference and decompress the annotation file.
 Link:ftp://ftp.sanger.ac.uk/pub/gencode/Gencode_human/release_19/gencode.v19.annotation.gtf.gz
 
-Command:
-gunzip <path/gencode.v19.annotation.gtf.gz>
+Command: gunzip <path/gencode.v19.annotation.gtf.gz>
 
 3.  Convert the chromosome names in the GTF file to reflect those in the reference genome
 
-Command:
-tail -n +6 gencode.v19.annotation.gtf | sed –e  "s/^chrM/MT/g;s/^chr//g" > gencode.v19.annotation.hs37d5_chr.gtf
+Command: tail -n +6 gencode.v19.annotation.gtf | sed –e  "s/^chrM/MT/g;s/^chr//g" > gencode.v19.annotation.hs37d5_chr.gtf
 Reference: Pancancer-PCAWG Wiki
 
 4.  Build the STAR reference genome:
 
 STAR
 --runMode genomeGenerate 
---genomeDir </path/star_genome/> 
---genomeFastaFiles </path/hs37d5.fa> 
+--genomeDir /path/star_genome/ 
+--genomeFastaFiles /path/hs37d5.fa
 --sjdbOverhang 100 
---sjdbGTFfile </path/gencode.v19.annotation.gtf> 
---runThreadN <runThreadN>
+--sjdbGTFfile /path/gencode.v19.annotation.gtf> 
+--runThreadN runThreadN
 
 Reference: Pancancer-PCAWG Wiki
 
@@ -102,16 +99,16 @@ Reference: Pancancer-PCAWG Wiki
 5. Picard sequence dictionary:
 
 Command:
-java –jar </path/picard.jar> 
+java –jar /path/picard.jar 
 --CreateSequenceDictionary 
-R=<path/hs37d5.fa> 
+R=path/hs37d5.fa 
 O=hs37d5.fa.dict
 
 
 6. Samtools reference index (.faidx): 
 
 Command: 
-samtools faidx <path/hs37d5.fa>
+samtools faidx path/hs37d5.fa
 
 7. RefFlat file: Convert annotation.gtf to refFlat.txt.
     -Download: gtfToGenePred: http://hgdownload.cse.ucsc.edu/admin/exe/macOSX.x86_64/gtfToGenePred
