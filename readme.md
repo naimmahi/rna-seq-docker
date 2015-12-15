@@ -24,41 +24,41 @@ The Docker version currently being used is: version 1.9.0, build 76d6bc9.
 
 ****Using the Docker image****
 
-1.  Load the Docker image. Must be done as root. 
+*   Load the Docker image. Must be done as root. 
 
-Command: docker load pipeline_star_cuff.tar
+        Command: docker load pipeline_star_cuff.tar
 
-2.  Run the Docker image as root.
+*   Run the Docker image as root.
 
-Command: docker run -v /home/ubuntu/:/host/home -v /etc:/host/etc -v /mnt/SCRATCH:/home/ubuntu/SCRATCH -i -t <docker_id> /usr/bin/python /home/ubuntu/expression/pipeline_elastic_cluster_new.py 
---analysis_id <analysis_id> 
---gtf <path/gencode.v19.annotation.hs37d5_chr.gtf> 
---p 8 
---star_pipeline /home/ubuntu/expression/icgc_rnaseq_align/star_align.py 
---input_dir <path/to/input/directory> 
---genome_fasta_file <path/hs37d5.fa>  
---genome_dir <path/to/star_genome_build> 
---quantMode TranscriptomeSAM 
---cufflinks_pipeline /home/ubuntu/expression/compute_expression.py
---ref_flat <path/to/refFlat.txt>
+        Command: docker run -v /home/ubuntu/:/host/home -v /etc:/host/etc -v /mnt/SCRATCH:/home/ubuntu/SCRATCH -i -t <docker_id> /usr/bin/python /home/ubuntu/expression/pipeline_elastic_cluster_new.py 
+        --analysis_id <analysis_id> 
+        --gtf <path/gencode.v19.annotation.hs37d5_chr.gtf> 
+        --p 8 
+        --star_pipeline /home/ubuntu/expression/icgc_rnaseq_align/star_align.py 
+        --input_dir <path/to/input/directory> 
+        --genome_fasta_file <path/hs37d5.fa>  
+        --genome_dir <path/to/star_genome_build> 
+        --quantMode TranscriptomeSAM 
+        --cufflinks_pipeline /home/ubuntu/expression/compute_expression.py
+        --ref_flat <path/to/refFlat.txt>
 
 The successful completion of the Docker will create the following directory structure in the directory containing the input file:
 
 Assuming the initial input was: /path/sample.tar
-
- The output is expected to be:
- path/sample.tar
- path/sample_star.log
- path/star_2_pass/cufflinks_sample.log
- path/star_2_pass/sample_star.bam
- path/star_2_pass/genes.fpkm_tracking
- path/star_2_pass/isoforms.fpkm_tracking
- path/star_2_pass/skipped.gtf
- path/star_2_pass/transcripts.gtf
- path/qc/
- path/qc/fastqc_results
- path/qc/sample.validate
- path/qc/sample.rna_seq_metrics.txt
+*   The output is expected to be:
+        
+        path/sample.tar
+        path/sample_star.log
+        path/star_2_pass/cufflinks_sample.log
+        path/star_2_pass/sample_star.bam
+        path/star_2_pass/genes.fpkm_tracking
+        path/star_2_pass/isoforms.fpkm_tracking
+        path/star_2_pass/skipped.gtf
+        path/star_2_pass/transcripts.gtf
+        path/qc/
+        path/qc/fastqc_results
+        path/qc/sample.validate
+        path/qc/sample.rna_seq_metrics.txt
 
 
 Supporting files to run the docker:
